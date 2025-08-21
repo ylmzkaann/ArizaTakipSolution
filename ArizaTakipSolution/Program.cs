@@ -1,15 +1,37 @@
+using ArizaTakip.Infrastructure;
+using ArizaTakip.Infrastructure.Repositories;
+using Microsoft.EntityFrameworkCore;
+
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
-
+// ----------------- DI (Dependency Injection) -----------------
 builder.Services.AddControllers();
-// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
+
+// AutoMapper: Application.Mappings içindeki profilleri tara
+
+// Generic Repository
+builder.Services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
+
+// DbContext
+builder.Services.AddDbContext<AppDbContext>(options =>
+    options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
+
+// CORS (gerekirse)
+builder.Services.AddCors(options =>
+{
+    options.AddDefaultPolicy(policy =>
+        policy.AllowAnyOrigin()
+              .AllowAnyHeader()
+              .AllowAnyMethod());
+});
+
+// Swagger
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
+// ----------------- HTTP Pipeline -----------------
 var app = builder.Build();
 
-// Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
@@ -17,6 +39,9 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
+
+// CORS (auth'dan önce olabilir, sende auth yok; sorun deðil)
+app.UseCors();
 
 app.UseAuthorization();
 

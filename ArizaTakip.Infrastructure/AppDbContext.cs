@@ -1,0 +1,14 @@
+﻿using Microsoft.EntityFrameworkCore;
+using ArizaTakip.Domain;
+
+namespace ArizaTakip.Infrastructure
+{
+    public class AppDbContext : DbContext
+    {
+        public AppDbContext(DbContextOptions<AppDbContext> options) : base(options) { }
+
+        public DbSet<User> Users { get; set; }
+        public DbSet<Request> Requests { get; set; }
+        public DbSet<Assignment> Assignments { get; set; }
+    }
+}

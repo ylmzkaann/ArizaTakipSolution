@@ -7,11 +7,17 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="Mapster" Version="7.4.0" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="9.0.7">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
     <PackageReference Include="Swashbuckle.AspNetCore" Version="6.6.2" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\ArizaTakip.Application\ArizaTakip.Application.csproj" />
+    <ProjectReference Include="..\ArizaTakip.Domain\ArizaTakip.Domain.csproj" />
     <ProjectReference Include="..\ArizaTakip.Infrastructure\ArizaTakip.Infrastructure.csproj" />
   </ItemGroup>
 

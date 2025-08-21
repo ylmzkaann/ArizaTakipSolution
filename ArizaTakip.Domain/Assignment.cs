@@ -1,12 +1,16 @@
-﻿namespace ArizaTakip.Domain
+﻿using ArizaTakip.Domain;
+
+public class Assignment
 {
-    public class Assignment
-    {
-        public int Id { get; set; }
-        public int RequestId { get; set; }
-        public int AssignedToId { get; set; }
-        public DateTime AssignedDate { get; set; }
-        public Request? Request { get; set; }
-        public User? AssignedTo { get; set; }
-    }
+    public int Id { get; set; }
+
+    // Talep
+    public int RequestId { get; set; }
+    public Request Request { get; set; } = null!;   
+
+    // Teknisyen
+    public int TechnicianId { get; set; }
+    public User Technician { get; set; } = null!;   
+
+    public DateTime AssignedAt { get; set; } = DateTime.Now;
 }
